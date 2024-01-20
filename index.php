@@ -43,7 +43,7 @@ require_login();
 $PAGE->set_pagelayout('standard');
 
 // The following code is used to set the page title.
-$PAGE->set_title($SITE->fullname);
+$PAGE->set_title(get_string('pluginname', 'local_greetings'));
 
 // To define the text that should be displayed as the main heading on the page, define the heading.
 $PAGE->set_heading(get_string('pluginname', 'local_greetings'));
