@@ -24,6 +24,7 @@
 
 // Basic Moodle page structure.
 require_once('../../config.php');
+require_once($CFG->dirroot. '/local/greetings/lib.php');
 
 // We must specify the Moodle context to which the current page belongs.
 $PAGE->set_context(context_system::instance());
@@ -51,9 +52,9 @@ echo $OUTPUT->header();
 
 // Displaying the output using localised strings!
 if (isloggedin()) {
-    echo get_string('greetingloggedinuser', 'local_greetings', fullname($USER));
+    echo local_greetings_get_greeting($USER);
 } else {
-    echo get_string('greetinguser', 'local_greetings');
+    echo get_string('greetingnotloggedinuser', 'local_greetings');
 }
 
 echo $OUTPUT->footer();

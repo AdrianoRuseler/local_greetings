@@ -26,5 +26,15 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Greetings';
-$string['greetinguser'] = 'Greetings, user.';
-$string['greetingloggedinuser'] = 'Greetings, {$a}.';
+$string['greetinguser'] = 'Greetings, DEFAULT user.';
+$string['greetingloggedinuser'] = 'Greetings, logged {$a}.';
+$string['greetingnotloggedinuser'] = 'Greetings, NOT logged {$a}.';
+
+// Display greetings based on user's country.
+$string['greetingusernull'] = 'Greetings, NULL user.';
+$string['greetinguserptbr'] = 'Olá, {$a}.';
+$string['greetinguserau'] = 'Hello, {$a}.';
+$string['greetinguseren'] = 'Hello, {$a}.';
+$string['greetinguseres'] = 'Hola, {$a}.';
+$string['greetinguserfj'] = 'Bula, {$a}.';
+$string['greetingusernz'] = 'Kia Ora, {$a}.';
