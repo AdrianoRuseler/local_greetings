@@ -49,11 +49,11 @@ $PAGE->set_heading(get_string('pluginname', 'local_greetings'));
 
 echo $OUTPUT->header();
 
-// Display a personalised message!
+// Displaying the output using localised strings!
 if (isloggedin()) {
-    echo '<h3>Greetings, ' . fullname($USER) . '!</h3>';
+    echo get_string('greetingloggedinuser', 'local_greetings', fullname($USER));
 } else {
-    echo '<h3>Greetings, user!</h3>';
+    echo get_string('greetinguser', 'local_greetings');
 }
 
 echo $OUTPUT->footer();
