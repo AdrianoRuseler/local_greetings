@@ -22,6 +22,7 @@
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+// Basic Moodle page structure.
 require_once('../../config.php');
 
 // We must specify the Moodle context to which the current page belongs.
@@ -47,5 +48,12 @@ $PAGE->set_title($SITE->fullname);
 $PAGE->set_heading(get_string('pluginname', 'local_greetings'));
 
 echo $OUTPUT->header();
-// ...
+
+// Display a personalised message!
+if (isloggedin()) {
+    echo '<h3>Greetings, ' . fullname($USER) . '!</h3>';
+} else {
+    echo '<h3>Greetings, user!</h3>';
+}
+
 echo $OUTPUT->footer();
