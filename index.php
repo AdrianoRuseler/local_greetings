@@ -48,6 +48,9 @@ $PAGE->set_title(get_string('pluginname', 'local_greetings'));
 // To define the text that should be displayed as the main heading on the page, define the heading.
 $PAGE->set_heading(get_string('pluginname', 'local_greetings'));
 
+// This creates an instance of our form.
+$messageform = new \local_greetings\form\message_form();
+
 echo $OUTPUT->header();
 
 // Displaying the output using localised strings!
@@ -55,6 +58,19 @@ if (isloggedin()) {
     echo local_greetings_get_greeting($USER);
 } else {
     echo get_string('greetingnotloggedinuser', 'local_greetings');
+}
+
+// This will display the form on the page.
+$messageform->display();
+
+// When the user types a message and clicks the submit button, we will simply output the message on the screen.
+if ($data = $messageform->get_data()) {
+    // This retrieves the submitted message from the form and displays it on the page.
+    $message = required_param('message', PARAM_TEXT);
+    echo $OUTPUT->heading($message, 4);
+
+    // Handy way to check what data has been submitted by the form.
+    var_dump($data);
 }
 
 echo $OUTPUT->footer();

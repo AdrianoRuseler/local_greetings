@@ -15,29 +15,38 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Plugin strings are defined here.
+ * Plugin version and other meta-data are defined here.
  *
  * @package     local_greetings
- * @category    string
  * @copyright   2024 Adriano Ruseler <adrianoruseler@gmail.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+ // Define the namespace for this class/file.
+namespace local_greetings\form;
+
+// Add the following code, since this file should not be accessed directly.
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Greetings';
-$string['greetinguser'] = 'Greetings, DEFAULT user.';
-$string['greetingloggedinuser'] = 'Greetings, logged {$a}.';
-$string['greetingnotloggedinuser'] = 'Greetings, NOT logged {$a}.';
+// Load the Forms library by adding this line.
+require_once($CFG->libdir . '/formslib.php');
 
-// Display greetings based on user's country.
-$string['greetingusernull'] = 'Greetings, NULL user.';
-$string['greetinguserptbr'] = 'Olá, {$a}.';
-$string['greetinguserau'] = 'Hello, {$a}.';
-$string['greetinguseren'] = 'Hello, {$a}.';
-$string['greetinguseres'] = 'Hola, {$a}.';
-$string['greetinguserfj'] = 'Bula, {$a}.';
-$string['greetingusernz'] = 'Kia Ora, {$a}.';
+/**
+ * Create a form and process user input.
+ *
+ * @param TODO
+ */
+class message_form extends \moodleform {
+    /**
+     * Define the form.
+     */
+    public function definition() {
+        $mform = $this->_form; // Don't forget the underscore!
 
-// Create the form.
-$string['yourmessage'] = 'Your message';
+        $mform->addElement('textarea', 'message', get_string('yourmessage', 'local_greetings')); // Add elements to your form.
+        $mform->setType('message', PARAM_TEXT); // Set type of element.
+
+        $submitlabel = get_string('submit');
+        $mform->addElement('submit', 'submitmessage', $submitlabel);
+    }
+}
