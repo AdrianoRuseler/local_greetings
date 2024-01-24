@@ -36,10 +36,6 @@ $PAGE->set_url(new moodle_url('/local/greetings/index.php'));
 // Once the current page's URL is set, we can access it via the $PAGE->url property.
 $baseurl = $PAGE->url;
 
-// This function checks that the current user is logged in.
-// If they are not logged in, then it redirects them to the site login.
-require_login();
-
 // The following code is used to set the page layout.
 $PAGE->set_pagelayout('standard');
 
@@ -48,6 +44,15 @@ $PAGE->set_title(get_string('pluginname', 'local_greetings'));
 
 // To define the text that should be displayed as the main heading on the page, define the heading.
 $PAGE->set_heading(get_string('pluginname', 'local_greetings'));
+
+// This function checks that the current user is logged in.
+// If they are not logged in, then it redirects them to the site login.
+require_login();
+
+// Do not allow guest user!
+if (isguestuser()) {
+    throw new moodle_exception('noguest');
+}
 
 // This creates an instance of our form.
 $messageform = new \local_greetings\form\message_form();
@@ -82,7 +87,7 @@ echo $OUTPUT->box_start('card-columns');
 foreach ($messages as $m) {
     echo html_writer::start_tag('div', ['class' => 'card']);
     echo html_writer::start_tag('div', ['class' => 'card-body']);
-    echo html_writer::tag('p', $m->message, ['class' => 'card-text']);
+    echo html_writer::tag('p', format_text($m->message, FORMAT_PLAIN), ['class' => 'card-text']);
     echo html_writer::tag('p', get_string('postedby', 'local_greetings', $m->firstname), ['class' => 'card-text']);
     echo html_writer::start_tag('p', ['class' => 'card-text']);
     echo html_writer::tag('small', userdate($m->timecreated), ['class' => 'text-muted']);
