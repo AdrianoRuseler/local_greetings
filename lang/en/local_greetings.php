@@ -41,3 +41,6 @@ $string['greetingusernz'] = 'Kia Ora, {$a}.';
 
 // Create the form.
 $string['yourmessage'] = 'Your message';
+
+// Display user details with greetings posts.
+$string['postedby'] = 'Posted by {$a}.';

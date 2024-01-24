@@ -27,7 +27,8 @@ require_once('../../config.php');
 require_once($CFG->dirroot. '/local/greetings/lib.php');
 
 // We must specify the Moodle context to which the current page belongs.
-$PAGE->set_context(context_system::instance());
+$context = context_system::instance();
+$PAGE->set_context($context);
 
 // Each page should have a unique URL.
 $PAGE->set_url(new moodle_url('/local/greetings/index.php'));
@@ -65,7 +66,15 @@ $messageform->display();
 
 // Display data from the database.
 // Fetches all the greeting messages from the table local_greetings_message.
-$messages = $DB->get_records('local_greetings_messages');
+$userfields = \core_user\fields::for_name()->with_identity($context);
+$userfieldssql = $userfields->get_sql('u');
+
+$sql = "SELECT m.id, m.message, m.timecreated, m.userid {$userfieldssql->selects}
+          FROM {local_greetings_messages} m
+     LEFT JOIN {user} u ON u.id = m.userid
+      ORDER BY timecreated DESC";
+
+$messages = $DB->get_records_sql($sql);
 
 // Display data from the database.
 echo $OUTPUT->box_start('card-columns');
@@ -74,6 +83,7 @@ foreach ($messages as $m) {
     echo html_writer::start_tag('div', ['class' => 'card']);
     echo html_writer::start_tag('div', ['class' => 'card-body']);
     echo html_writer::tag('p', $m->message, ['class' => 'card-text']);
+    echo html_writer::tag('p', get_string('postedby', 'local_greetings', $m->firstname), ['class' => 'card-text']);
     echo html_writer::start_tag('p', ['class' => 'card-text']);
     echo html_writer::tag('small', userdate($m->timecreated), ['class' => 'text-muted']);
     echo html_writer::end_tag('p');
@@ -94,6 +104,7 @@ if ($data = $messageform->get_data()) {
         $record = new stdClass;
         $record->message = $message;
         $record->timecreated = time();
+        $record->userid = $USER->id;
 
         $DB->insert_record('local_greetings_messages', $record);
     }
