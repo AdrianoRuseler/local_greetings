@@ -63,6 +63,26 @@ if (isloggedin()) {
 // This will display the form on the page.
 $messageform->display();
 
+// Display data from the database.
+// Fetches all the greeting messages from the table local_greetings_message.
+$messages = $DB->get_records('local_greetings_messages');
+
+// Display data from the database.
+echo $OUTPUT->box_start('card-columns');
+
+foreach ($messages as $m) {
+    echo html_writer::start_tag('div', array('class' => 'card'));
+    echo html_writer::start_tag('div', array('class' => 'card-body'));
+    echo html_writer::tag('p', $m->message, array('class' => 'card-text'));
+    echo html_writer::start_tag('p', array('class' => 'card-text'));
+    echo html_writer::tag('small', userdate($m->timecreated), array('class' => 'text-muted'));
+    echo html_writer::end_tag('p');
+    echo html_writer::end_tag('div');
+    echo html_writer::end_tag('div');
+}
+
+echo $OUTPUT->box_end();
+
 // When the user types a message and clicks the submit button, we will simply output the message on the screen.
 if ($data = $messageform->get_data()) {
     // This retrieves the submitted message from the form and displays it on the page.
