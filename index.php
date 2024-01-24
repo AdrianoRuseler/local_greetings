@@ -67,10 +67,16 @@ $messageform->display();
 if ($data = $messageform->get_data()) {
     // This retrieves the submitted message from the form and displays it on the page.
     $message = required_param('message', PARAM_TEXT);
-    echo $OUTPUT->heading($message, 4);
-
-    // Handy way to check what data has been submitted by the form.
+        // Handy way to check what data has been submitted by the form.
     var_dump($data);
+
+    if (!empty($message)) {
+        $record = new stdClass;
+        $record->message = $message;
+        $record->timecreated = time();
+
+        $DB->insert_record('local_greetings_messages', $record);
+    }
 }
 
 echo $OUTPUT->footer();
