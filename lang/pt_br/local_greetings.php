@@ -25,10 +25,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Greetings';
-$string['greetinguser'] = 'Greetings, DEFAULT user.';
-$string['greetingloggedinuser'] = 'Greetings, logged {$a}.';
-$string['greetingnotloggedinuser'] = 'Greetings, NOT logged {$a}.';
+$string['pluginname'] = 'Saudações';
+$string['greetinguser'] = 'Saudações, usuário padrão.';
+$string['greetingloggedinuser'] = 'Saudações, logado {$a}.';
+$string['greetingnotloggedinuser'] = 'Saudações, não logado {$a}.';
 
 // Display greetings based on user's country.
 $string['greetingusernull'] = 'Greetings, NULL user.';
@@ -40,7 +40,7 @@ $string['greetinguserfj'] = 'Bula, {$a}.';
 $string['greetingusernz'] = 'Kia Ora, {$a}.';
 
 // Create the form.
-$string['yourmessage'] = 'Your message';
+$string['yourmessage'] = 'Sua mensagem:';
 
 // Display user details with greetings posts.
 $string['postedby'] = 'Postado por {$a}.';
