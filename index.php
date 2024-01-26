@@ -58,12 +58,13 @@ if (isguestuser()) {
 $allowpost = has_capability('local/greetings:postmessages', $context);
 $allowview = has_capability('local/greetings:viewmessages', $context);
 $deleteanypost = has_capability('local/greetings:deleteanymessage', $context);
+$deletemypost = has_capability('local/greetings:deleteamymessage', $context);
 
 $action = optional_param('action', '', PARAM_TEXT);
 
 if ($action == 'del') {
     $id = required_param('id', PARAM_TEXT);
-    if ($deleteanypost) {
+    if ($deleteanypost || deletemypost) {
         $DB->delete_records('local_greetings_messages',  ['id' => $id]);
     }
 }
@@ -108,7 +109,7 @@ if ($allowview) {
         echo html_writer::tag('p', get_string('postedby', 'local_greetings', $m->firstname), ['class' => 'card-text']);
         echo html_writer::start_tag('p', ['class' => 'card-text']);
         echo html_writer::tag('small', userdate($m->timecreated), ['class' => 'text-muted']);
-        if ($deleteanypost) {
+        if ($deleteanypost || ($deletemypost && $m->userid == $USER->id)) {
             echo html_writer::start_tag('p', ['class' => 'card-footer text-center']);
             echo html_writer::link(
                 new moodle_url(
