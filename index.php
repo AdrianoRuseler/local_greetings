@@ -58,14 +58,20 @@ if (isguestuser()) {
 $allowpost = has_capability('local/greetings:postmessages', $context);
 $allowview = has_capability('local/greetings:viewmessages', $context);
 $deleteanypost = has_capability('local/greetings:deleteanymessage', $context);
-$deletemypost = has_capability('local/greetings:deleteamymessage', $context);
+$deletemypost = has_capability('local/greetings:deletemymessage', $context);
 
 $action = optional_param('action', '', PARAM_TEXT);
 
 if ($action == 'del') {
     $id = required_param('id', PARAM_TEXT);
     if ($deleteanypost || deletemypost) {
-        $DB->delete_records('local_greetings_messages',  ['id' => $id]);
+        $params = ['id' => $id];
+        // Users without permission should only delete their own post.
+        if (!$deleteanypost) {
+            $params += ['userid' => $USER->id];
+        }
+        $DB->delete_records('local_greetings_messages',  $params);
+        redirect($PAGE->url); // Reload this page to remove visible sesskey.
     }
 }
 
@@ -143,6 +149,7 @@ if ($data = $messageform->get_data()) {
         $record->userid = $USER->id;
 
         $DB->insert_record('local_greetings_messages', $record);
+        redirect($PAGE->url); // Reload this page to remove visible sesskey.
     }
 }
 
