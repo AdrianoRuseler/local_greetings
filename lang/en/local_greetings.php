@@ -44,3 +44,8 @@ $string['yourmessage'] = 'Your message';
 
 // Display user details with greetings posts.
 $string['postedby'] = 'Posted by {$a}.';
+
+// Describe the two new capabilities.
+$string['greetings:viewmessages'] = 'View messages on the Greetings wall';
+$string['greetings:postmessages'] = 'Post a new message on the Greetings wall';
+$string['greetings:deleteanymessage'] = 'Delete any message on the Greetings wall';

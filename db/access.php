@@ -22,19 +22,26 @@
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+ defined('MOODLE_INTERNAL') || die();
 
- // Preventing direct access to certain files
- // Some files cannot be accessed directly by users through the web browser.
- // Moodle handles this through the use of the code given below.
- // This code ensures that if this file is being directly accessed,
- // it will just stop executing after the first line.
- // Such files are usually accessed through another file or internal APIs,
- // where the pre-conditions for accessing such files are already defined/loaded.
-
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->component = 'local_greetings';
-$plugin->release = '0.2.0';
-$plugin->version = 2024012601;
-$plugin->requires = 2022112800;
-$plugin->maturity = MATURITY_ALPHA;
+// Define two capabilities, for posting and viewing messages.
+$capabilities = [
+    'local/greetings:postmessages' => [
+        'riskbitmask' => RISK_SPAM,
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => ['user' => CAP_ALLOW],
+    ],
+    'local/greetings:viewmessages' => [
+        'riskbitmask' => RISK_SPAM,
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => ['user' => CAP_ALLOW],
+    ],
+    'local/greetings:deleteanymessage' => [
+        'riskbitmask' => RISK_SPAM,
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => ['user' => CAP_ALLOW],
+    ],
+];

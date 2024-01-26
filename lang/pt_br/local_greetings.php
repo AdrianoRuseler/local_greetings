@@ -44,3 +44,8 @@ $string['yourmessage'] = 'Sua mensagem:';
 
 // Display user details with greetings posts.
 $string['postedby'] = 'Postado por {$a}.';
+
+// Describe the two new capabilities.
+$string['greetings:viewmessages'] = 'Ver mensagens no mural de saudações';
+$string['greetings:postmessages'] = 'Poste uma nova mensagem no mural de Saudações';
+$string['greetings:deleteanymessage'] = 'Deletar quaisquer mensagem no mural de Saudações';
