@@ -6,7 +6,7 @@ TODO Provide more detailed description here.
 
 ## Enabling developer settings in Moodle
 
-´´´bash
+```bash
 // Enabling developer settings in Moodle.
 $CFG->debug = E_ALL;
 $CFG->debugdisplay = 1;
