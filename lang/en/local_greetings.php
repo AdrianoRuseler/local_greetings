@@ -53,3 +53,8 @@ $string['greetings:deletemymessage'] = 'Delete my messages on the Greetings wall
 
 $string['messagecardbgcolor'] = 'Message card color';
 $string['messagecardbgcolordesc'] = 'Background color of the message card';
+
+// Add option to edit post.
+$string['editmessage'] = 'Edit message';
+$string['norecordfound'] = 'No record found!';
+$string['cannoteditmessage'] = 'You cannot edit this message';

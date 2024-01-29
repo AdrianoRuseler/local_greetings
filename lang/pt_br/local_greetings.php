@@ -53,3 +53,8 @@ $string['greetings:deletemymessage'] = 'Deletar minhas mensagems no mural de Sau
 
 $string['messagecardbgcolor'] = 'Cor do cartão de mensagem';
 $string['messagecardbgcolordesc'] = 'Cor de fundo do cartão de mensagem';
+
+// Add option to edit post.
+$string['editmessage'] = 'Editar mensagem';
+$string['norecordfound'] = 'Nenhum registro encontrado!';
+$string['cannoteditmessage'] = 'Você não pode editar esta mensagem';
