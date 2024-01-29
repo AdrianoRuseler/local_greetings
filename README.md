@@ -4,6 +4,19 @@ TODO Describe the plugin shortly here.
 
 TODO Provide more detailed description here.
 
+## Enabling developer settings in Moodle
+
+´´´bash
+// Enabling developer settings in Moodle.
+$CFG->debug = E_ALL;
+$CFG->debugdisplay = 1;
+$CFG->langstringcache = 0;
+$CFG->cachetemplates = 0;
+$CFG->cachejs = 0;
+$CFG->perfdebug = 15;
+$CFG->debugpageinfo = 1;
+```
+
 ## Installing via uploaded ZIP file ##
 
 1. Log in to your Moodle site as an admin and go to _Site administration >
