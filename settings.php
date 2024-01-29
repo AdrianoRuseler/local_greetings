@@ -22,19 +22,21 @@
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-
- // Preventing direct access to certain files
- // Some files cannot be accessed directly by users through the web browser.
- // Moodle handles this through the use of the code given below.
- // This code ensures that if this file is being directly accessed,
- // it will just stop executing after the first line.
- // Such files are usually accessed through another file or internal APIs,
- // where the pre-conditions for accessing such files are already defined/loaded.
-
+// Preventing direct access to certain files.
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'local_greetings';
-$plugin->release = '0.2.0';
-$plugin->version = 2024012900;
-$plugin->requires = 2022112800;
-$plugin->maturity = MATURITY_ALPHA;
+if ($hassiteconfig) {
+    $settings = new admin_settingpage('local_greetings', get_string('pluginname', 'local_greetings'));
+    $ADMIN->add('localplugins', $settings);
+
+    if ($ADMIN->fulltree) {
+        require_once($CFG->dirroot . '/local/greetings/lib.php');
+
+        $settings->add(new admin_setting_configtext(
+            'local_greetings/messagecardbgcolor',
+            get_string('messagecardbgcolor', 'local_greetings'),
+            get_string('messagecardbgcolordesc', 'local_greetings'),
+            '#FFFFFF',
+        ));
+    }
+}

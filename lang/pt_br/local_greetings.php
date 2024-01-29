@@ -50,3 +50,6 @@ $string['greetings:viewmessages'] = 'Ver mensagens no mural de saudações';
 $string['greetings:postmessages'] = 'Poste uma nova mensagem no mural de Saudações';
 $string['greetings:deleteanymessage'] = 'Deletar quaisquer mensagem no mural de Saudações';
 $string['greetings:deletemymessage'] = 'Deletar minhas mensagems no mural de Saudações';
+
+$string['messagecardbgcolor'] = 'Cor do cartão de mensagem';
+$string['messagecardbgcolordesc'] = 'Cor de fundo do cartão de mensagem';

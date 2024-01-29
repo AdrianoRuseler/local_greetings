@@ -109,8 +109,11 @@ if ($allowview) {
     // Display data from the database.
     echo $OUTPUT->box_start('card-columns');
 
+    // Reads the setting named messagecardbgcolor for our Greetings plugin.
+    $cardbackgroundcolor = get_config('local_greetings', 'messagecardbgcolor');
+
     foreach ($messages as $m) {
-        echo html_writer::start_tag('div', ['class' => 'card']);
+        echo html_writer::start_tag('div', ['class' => 'card', 'style' => "background: $cardbackgroundcolor"]);
         echo html_writer::start_tag('div', ['class' => 'card-body']);
         echo html_writer::tag('p', format_text($m->message, FORMAT_PLAIN), ['class' => 'card-text']);
         echo html_writer::tag('p', get_string('postedby', 'local_greetings', $m->firstname), ['class' => 'card-text']);
