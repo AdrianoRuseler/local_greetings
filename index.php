@@ -63,6 +63,7 @@ $deletemypost = has_capability('local/greetings:deletemymessage', $context);
 $action = optional_param('action', '', PARAM_TEXT);
 
 if ($action == 'del') {
+    require_sesskey(); // Add sesskey protection.
     $id = required_param('id', PARAM_TEXT);
     if ($deleteanypost || deletemypost) {
         $params = ['id' => $id];
@@ -120,7 +121,7 @@ if ($allowview) {
             echo html_writer::link(
                 new moodle_url(
                     '/local/greetings/index.php',
-                    ['action' => 'del', 'id' => $m->id]
+                    ['action' => 'del', 'id' => $m->id, 'sesskey' => sesskey()]
                 ),
                 $OUTPUT->pix_icon('t/delete', '') . get_string('delete')
             );
